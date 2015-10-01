@@ -1,0 +1,51 @@
+\ProvidesPackage{qgraph}
+
+\usepackage{color}					% Coloured Text
+\usepackage[usenames,dvipsnames]{xcolor}
+
+\RequirePackage{xparse}
+\RequirePackage{tikz}
+
+\RequirePackage{pgfplots}
+
+\makeatletter
+\NewDocumentCommand{\qgraph}{o m m}{
+  \IfNoValueTF{#1}
+     {\def\linecolor{muted-orange}}
+     {\def\linecolor{#1}}
+\begin{tikzpicture} 
+  \begin{axis}[ width=\linewidth,
+                minor tick num=1, 
+                axis x line=middle, 
+                axis y line=middle, 
+                every inner x axis line/.append style= {|->>, draw=black!30, help lines}, 
+                every inner y axis line/.append style= {|->>, draw=black!30, help lines}, 
+                xlabel=$x$,ylabel=$#2$ ] 
+     \addplot[\linecolor,domain=#3] {#2}; 
+   \end{axis} 
+\end{tikzpicture}}
+\makeatother
+
+\makeatletter
+\NewDocumentCommand{\tinygraph}{o m m}{
+  \IfNoValueTF{#1}
+     {\def\linecolor{muted-orange}}
+     {\def\linecolor{#1}}
+\vspace{5mm}
+\noindent
+\begin{tikzpicture} 
+  \begin{axis}[ width=\linewidth+15pt,
+                height=30mm,
+                thick,
+                font=\scriptsize,
+                minor tick num=0, 
+                axis x line=middle, 
+                axis y line=middle, 
+                every inner x axis line/.append style= {|->>, draw=black!30, help lines}, 
+                every inner y axis line/.append style= {|->>, draw=black!30, help lines}, 
+                 ] 
+     \addplot[\linecolor,domain=#3] {#2}; 
+   \end{axis} 
+\vspace{5mm}
+\end{tikzpicture}}
+\makeatother

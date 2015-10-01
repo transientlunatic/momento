@@ -1,19 +1,323 @@
-\documentclass[a4paper, openany, oldfontcommands,twocolumn, 10pt]{momento}
+\documentclass[ebook, openany, oldfontcommands,twocolumn, 10pt]{momento}
 \usepackage{lipsum}
-\title{Momento, or the description of a beautiful package for typesetting notes easily.}
+
+\usepackage{pgfplots}
+\usepackage{physicsplus}
+
+\usepackage{breqn}
+
+\title{Uno Momento}
 \author{Daniel Williams}
 \begin{document}
+
 \maketitle
+
+\tableofcontents
+
 \lipsum
 
 \chapter{Making Notes}
 \label{cha:making-notes}
 
-\lipsum
+\lipsum \lipsum
 
-\part{A part}
+\part{A part with a very very very very long name}
 \label{part:part}
 
+\lipsum
+\lipsum
 
+\section{A section of stuff.}
+\label{sec:section-stuff}
+
+\begin{fequation}[Strange Equation]
+   H = \eqnote{Y^2}{Second longer} + U 
+\end{fequation}
+
+\lipsum
+
+\subsection{More section}
+\label{sec:more-section}
+
+\lipsum[3]
+\[
+E = mc^2
+\]
+\lipsum[2]
+
+\chapter{More Note making}
+\label{cha:more-note-making}
+
+\lipsum \lipsum \lipsum
+
+\tinygraph[muted-blue]{(x<3 || x>7)?1:x^2}{0:10}
+
+\begin{example}
+  \lipsum
+\end{example}
+
+
+\begin{expl}
+  %\clearevenside \switchcolumn*[] \switchcolumn[3]
+
+  \section{Free Scalar Fields}
+  \label{sec:sect-expl-envir}
+
+  \switchcolumn*[] \switchcolumn[1]
+
+  A scalar field associates a scalar with every point in a physical
+  space. The scalar may be a number or a physical quantity, and must
+  be coordinate invariant.
+
+  \begin{illustration}
+    Some examples of free scalar fields are temperature distributions
+    in space, and the Higgs field.
+  \end{illustration}
+
+  Scalar field theory constitutes the simplest possible field theory,
+  with a Lagrangian
+  \begin{equation}
+    \label{eq:15}
+    \Lag = \half \partial_{\mu} \phi \partial^{\mu} \phi - \half m^2 \phi^2
+  \end{equation}
+
+  with the Euler-Lagrange equations giving a wave equation, the
+  Klein-Gordon equation.
+
+
+\begin{fequation}[Klein-Gordon Equation]
+  \label{eq:kleingordonscalar}
+  (\partial^2 + m^2) \phi = 0
+\end{fequation}
+
+\begin{derivation}
+  The components of the Euler-Lagrange equations from the Lagrangian
+  in equation \eqref{eq:15} are
+  \begin{subequations}
+    \begin{align}
+      \pdv{\Lag}{\phi} &= -m^2 \phi \\
+      \pdv{\Lag}{(\partial_{\mu} \phi)} &= \partial^{\mu} \phi \\
+      \text{so \quad} \partial_{\mu} \qty(\pdv{\Lag}{(\partial_{\mu}
+        \phi)}) &= \partial_{\mu} \partial^{\mu} \phi
+    \end{align}
+  \end{subequations}
+\end{derivation}
+
+which is the relativistic relation between energy and momentum---a
+relativistic Schr\"odinger equation.
+
+\begin{illustration} We can see that the Klein-Gordon equation is a
+  relativistic statement of Schr\"odinger's equation by considering
+  the equation's form in non-covariant notation.
+  \begin{equation*}
+    \label{eq:16} \qty( - \pdv[2]{t} + \nabla^2 ) \phi = m^2 \phi
+  \end{equation*}
+\end{illustration}
+
+By taking a plane wave solution we have the general form of the
+potential being
+  \begin{dmath}
+    \phi(x) = \int \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} \left(
+      a(\vec{k}) \exp(- i k \vdot x) + a^{*}(\vec{k}) \exp(i k \vdot
+      x) \right)
+  \end{dmath}
+
+\begin{derivation}
+
+  Taking a plane wave solution of equation \ref{eq:kleingordonscalar},
+  \[ \phi \propto \exp(i k \vdot x) = \exp( i (k^0 t - \vec{k} \vdot
+  \vec{x})) \] which requires that
+  \[ (k^0)^2 - \vec{k}^2 = m^2 \] Then, this allows
+  \begin{equation}
+    \label{eq:17}
+    k^0 = \pm \sqrt{k^2 + m^2}
+  \end{equation}
+  where both the positive and the negative solutions are
+  valid. Letting $E(k)= + \sqrt{k^2 + m^2}$, we have a general form
+  for the potential:
+  \begin{dmath}
+    \label{eq:18}
+    \phi(x) = \int \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} \left(
+      a(-\vec{k}) e^{i\qty(E(\vec{k}) t - \vec{k} \vdot \vec{x})} +
+      a^{*}(\vec{k}) e^{(i\qty(E(\vec{k}) t - \vec{k} \vdot \vec{x}))}
+    \right)
+  \end{dmath}
+  letting $\vec{k} \to - \vec{k}$ in the first integral,
+  \begin{dmath}
+    \phi(x) = \int \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} \left(
+      a(\vec{k}) \exp(- i k \vdot x) + a^{*}(\vec{k}) \exp(i k \vdot
+      x) \right)
+  \end{dmath}
+\end{derivation}
+
+\section{The Normalisation Measure}
+\label{sec:norm-meas}
+
+The normalisation measure,
+\[ \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} \] 
+while being an odd-looking quantity is the covariant choice
+for normalisation. 
+
+\begin{derivation}
+  We can show that this is the covariant choice by considering a
+  function $f(x)$, and then integrating it,
+
+\begin{align*}
+  \int \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} f(k) &= \int  \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} \dd{E^2} \delta(E^2 - \vec{k}^2 - m^2) f(k) \\
+&=  \int  \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k})} 2 E\dd{E} \delta(E^2 - \vec{k}^2 - m^2) f(k) \\
+&=  \int  \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k}) } 2 \pi\delta(E^2 - \vec{k}^2 - m^2) f(k) 
+\end{align*}
+where the $\delta(E^2 - \vec{k}^2)$ condition represents the
+requirement for the state to be located ``on-shell''.
+\end{derivation}
+
+\section{The Energy Momentum Tensor}
+\label{sec:energy-moment-tens}
+
+The energy momentum tensor is
+
+\newcommand{\metricten}{\ten{g}{^{\mu}^{\nu}}}
+
+\begin{align*}
+  \label{eq:19}
+  \ten{T}{^{\mu}^{\nu}} &= \pdv{\Lag}{(\partial_{\mu}\phi)} \partial^{\nu} \phi - \metricten \Lag \\
+&= \partial^{\mu} \phi \partial^{\nu} \phi - \metricten \qty(\half \partial_{\rho} \phi \partial^{\rho} \phi - \half m^2 \phi )
+\end{align*}
+
+Then
+
+\begin{equation}
+  \label{eq:20}
+  \ten{T}{^{00}} = \partial^0 \phi \partial^0 \phi - 
+     \half \qty( \partial_0 \phi \partial^0 \phi 
+               - \nabla \phi \vdot \nabla \phi
+               - m^2 \phi  )
+\end{equation}
+So the Hamiltonian is
+\begin{align}
+  \label{eq:21}
+  H &= \int \ten{T}{^{00}} \dd[3]{x} \nonumber\\
+ &= \half \int \qty( (\partial_0 \phi)^2 + (\nabla \phi)^2 + m^2\phi^2 ) \dd[3]{x}
+\end{align}
+This works for a classical theory, but in quantum-mechanical theories
+we require $H$ to be an operator, however, we can't simply convert it
+into an operator, we also need to turn the fields into operators.
+
+\section{Second Quantisation}
+\label{sec:second-quantisation}
+
+Th second quantisation is the process of turning fields into
+operators, as opposed to the approach of the first quantisation where
+observables are made into operators.
+
+In order to do this we define 
+\begin{definition}[Canonically Conjugate Momentum]
+  \[ \pi(x) = \pdv{\Lag}{(\partial_0 \phi)} = \partial_0 \phi(x)  \]
+\end{definition}
+So we can postulate that $\phi$ and $\pi$ are operators which satisfy the equal-time commutation relations
+\begin{subequations}
+\begin{align}
+  \comm{\Op{\phi}(\vec{x}, t)}{\Op{\pi} (\vec{x}, t)} &= i \delta^3(\vec{x} - \vec{y}) \\
+\comm{\Op{\phi}(\vec{x}, t)}{\Op{\phi}(\vec{y}, t)} &= \comm{\Op{\pi}(\vec{x}, t)}{\Op{\pi}(\vec{y}, t)} = 0
+\end{align}
+\end{subequations}
+
+This doesn't change the Klein-Gordon equation, although it now acts
+like an operator, so
+
+\begin{equation}
+  \label{eq:22}
+  \Op{\phi}(\vec{x}) = \int \frac{\dd[3]{k}}{(2 \pi)^3 2 E(\vec{k}) }
+                      \qty(\Op{a}(\vec{k}) e^{-ik \vdot x} + \hcon{\Op{a}}(\vec{k}) e^{i k \vdot x})
+\end{equation}
+
+where the quantities $\Op{a}$ and $\hcon{\Op{a}}$ are now operators. The corresponding equation for $\pi$ is
+
+\begin{equation}
+  \label{eq:23}
+  \Op{\pi} (x) = \partial_0 \Op{\phi}(x) = \frac{i}{2} \int \frac{\dd[3]{k}}{(2 \pi)^3} \qty( - \Op{a} (\vec{k}) e^{-ik \vdot x} + \hOp{a}(\vec{k}) e^{ik \vdot x} )
+\end{equation}
+
+\section{Creation and Annihilation Operators}
+\label{sec:creat-annih-oper}
+
+\begin{subequations}
+  \begin{align}
+   \label{eq:28}
+    \Op{a}(\vec{k}) &= \int \qty[ E(\vec{k}) \Op{\phi} + i \Op{\pi}(x) ] e^{i k \vdot x} \\
+   \label{eq:29}
+    \hOp{a}(\vec{k}) &= \int \qty[E(\vec{k}) \Op{\phi} - i \Op{\pi}(x) ] e^{-i k \vdot x}
+  \end{align}
+\end{subequations}
+Which are the annihilation (\ref{eq:28}) and creation (\ref{eq:28}) operators.
+
+\begin{derivation}
+$\Op{a}$ and $\hOp{a}$ can be found through an inverse Fourier transform. 
+For $\Op{\phi}$,
+
+  \begin{align*}
+   \label{eq:28}
+    \Op{a}(\vec{k}) &= \int \qty[ E(\vec{k}) \Op{\phi} + i \Op{\pi}(x) ] e^{i k \vdot x} \\
+   \label{eq:29}
+    \hOp{a}(\vec{k}) &= \int \qty[E(\vec{k}) \Op{\phi} - i \Op{\pi}(x) ] e^{-i k \vdot x}
+  \end{align*}
+\begin{align*}
+\int & \dd[3]{x}  \ \Op{\phi} \ e^{-ik \vdot x} \\&=
+  \int \frac{\dd[3]{k'}}{(2 \pi)^3 2 E(\vec{k})} 
+   \bigg( \Op{a}(\vec{k}') \int \dd[3]{x} e^{-i (k+k') \vdot x}   + \hOp{a}(\vec{k}') \int \dd[3]{x} e^{-i(k'-k) \vdot x} \bigg) 
+ \\[1em] &=
+ \int \frac{\dd[3]{k'}}{2 E(\vec{k})} \bigg(\Op{a}(\vec{k}') \delta^3(\vec{k} + \vec{k}') e^{-i (E(\vec{k}) - E(\vec{k}'))t}  +
+ \hOp{a}(\vec{k}') \delta^3(\vec{k}' - \vec{k}) e^{i(E(\vec{k}') - E(\vec{k}))t} \bigg) 
+ \\[1em] &=
+\frac{1}{2 E(\vec{k})} \Big(\Op{a}(-\vec{k}) e ^{-i2E(\vec{k})t} + \hOp{a}(\vec{k}) \Big)
+\end{align*}
+and for $\Op{\pi}$
+
+\begin{equation}
+  \int \dd[3]{x} \Op{\pi}(x) e^{-i k \vdot x} = \frac{i}{2}
+   \qty( -\Op{a}(-\vec{k}) e^{-i 2 E(\vec{k})t} + \hOp{a}(\vec{k}) )
+\end{equation}
+
+In each case using the definition of the $\delta$-function, and 
+\[ 
+   e^{i(k' - k) \vdot x} = e^{-i (\vec{k}' - \vec{k}) \vdot x}
+                       e^{i \qty( E(\vec{k}') - E(\vec{k}) ) t}
+\]
+
+Then
+\begin{subequations}
+\begin{align}
+\label{eq:25}
+  \int \dd[3]{x} \qty[ E(\vec{k}) \Op{\phi}(x) - i \Op{\pi}(x) ]
+                 e^{-i k \vdot x} &= \hOp{a}(\vec{k}) \\
+\label{eq:26}
+  \int \dd[3]{x} \qty[ E(\vec{k}) \Op{\phi}(x) + i \Op{\pi}(x) ]
+                 e^{-i k \vdot x} &= \Op{a}(-\vec{k}) e^{-2 i E(\vec{k}) t}
+\end{align}
+\end{subequations}
+Equation (\ref{eq:26}) is in need of some further manipulation; we
+split the space and the time components, so
+\begin{equation*}
+  \int \qty[ E(\vec{k}) \Op{\phi}(x) + i \Op{\pi}(x)] e^{i k \vdot x} e^{-i E(\vec{k}) t} = a(-k) e^{-2i E(\vec{k} t)} 
+\end{equation*}
+Then, multiplying by $\exp(2 i E(\vec{k}) t)$,
+\[ 
+  a(-k) = \int \qty[ E(\vec{k}) \Op{\phi}(x) + i \Op{\pi}(x)] e^{i \vec{k} \vdot \vec{x}} e^{2 i E(\vec{k}) t}
+\]
+and replacing $\vec{k} \to - \vec{k}$,
+\begin{subequations}
+  \begin{align}
+   \label{eq:28}
+    \Op{a}(\vec{k}) &= \int \qty[ E(\vec{k}) \Op{\phi} + i \Op{\pi}(x) ] e^{i k \vdot x} \\
+   \label{eq:29}
+    \hOp{a}(\vec{k}) &= \int \qty[E(\vec{k}) \Op{\phi} - i \Op{\pi}(x) ] e^{-i k \vdot x}
+  \end{align}
+\end{subequations}
+
+\end{derivation}
+
+
+
+\end{expl}
 
 \end{document}
